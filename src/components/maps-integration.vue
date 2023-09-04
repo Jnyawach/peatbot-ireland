@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {Loader} from "@googlemaps/js-api-loader"
+import ee from "@google/earthengine"
 import {onMounted, ref, watch} from "vue";
 import { useGeolocation } from '@vueuse/core'
 import {debounce} from 'lodash';
 
+
 const {coords}=useGeolocation()
-const loader=new  Loader({libraries:['places','marker'],apiKey:'AIzaSyA1rDOZyiy7z0xmveeEsIM5Ms1DX1O2fDE'})
+const loader=new  Loader({libraries:['places','marker'],apiKey:import.meta.env.VITE_GOOGLE_MAP_KEY})
 let map=ref()
 let mapContainer=ref()
 
@@ -14,16 +16,47 @@ const searchSuggestions=ref()
 const searchBox=ref()
 const searchInput=ref()
 const showSuggestions=ref(false)
+const clientId = import.meta.env.VITE_CLIENT_ID;
 
-onMounted( async ()=>{
+onMounted( ()=>{
+
+  ee.data.authenticateViaOauth(clientId, initialize, function(e) {
+    console.error('Authentication error: ' + e);
+  }, null, function() {
+    ee.data.authenticateViaPopup(initialize);
+  })
+  ee.initialize();
+
+})
+
+var initialize = function() {
+  ee.initialize(null, null, function() {
+    // ... run analysis ...
+  }, function(e) {
+    console.error('Initialization error: ' + e);
+  });
+};
+
+const setUpMap=  ()=>{
+  ee.initialize();
   //load map
-  await loader.load()
+  loader.load()
   map.value = new google.maps.Map(mapContainer.value,{
     center:{lat:coords.value.latitude,lng:coords.value.longitude },
     zoom:12
   })
-})
+  const srtm = ee.Image("CGIAR/SRTM90_V4");
+  const slope = ee.Terrain.slope(srtm);
 
+  // Create a new tile source to fetch visible tiles on demand and display them
+  // on the map.
+  const mapId = slope.getMap({min: 0, max: 60});
+  const tileSource = new ee.layers.EarthEngineTileSource(mapId);
+  const overlay = new ee.layers.ImageOverlay(tileSource);
+  embeddedMap.overlayMapTypes.push(overlay);
+
+
+}
 watch(searchInput, debounce(function () {
   showSuggestions.value=true
   handleSearchInput()
@@ -45,6 +78,7 @@ const handleSearchInput=()=>{
 const setNewLocation=(lat:number,lng:number)=>{
   searchMarker.value.setPosition(new google.maps.LatLng(lat,lng));
 }
+
 
 const getPredictions=(predictions: google.maps.places.QueryAutocompletePrediction[] | null,
                       status: google.maps.places.PlacesServiceStatus)=>{
@@ -69,6 +103,20 @@ const selectSuggestion = (suggestion:any) => {
 
   showSuggestions.value = false;
 };
+
+//initialize EE
+
+
+
+function onSignInButtonClick() {
+
+  ee.data.authenticateViaOauth(clientId, initialize, function(e) {
+    console.error('Authentication error: ' + e);
+  }, null, function() {
+    ee.data.authenticateViaPopup(initialize);
+  })
+ 
+}
 </script>
 
 <template>
@@ -86,6 +134,16 @@ const selectSuggestion = (suggestion:any) => {
           <button class="px-3 h-full w-full border py-2 hover:bg-sky-600 hover:text-white">NDVI Analysis</button>
         </div>
       </div>
+    </div>
+
+    <div>
+      <input
+          id="g-sign-in"
+          type="image"
+          src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png"
+          @click="onSignInButtonClick()"
+          alt="Sign in with Google"
+      />
     </div>
   </div>
   <div class="col-span-5">

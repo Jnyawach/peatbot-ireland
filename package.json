@@ -13,9 +13,12 @@
     "@googlemaps/js-api-loader": "^1.16.2",
     "@vueuse/core": "^10.4.0",
     "lodash": "^4.17.21",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue3-google-login": "^2.0.20",
+    "vue3-google-oauth2": "^1.0.7"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.197",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.15",
     "postcss": "^8.4.28",
