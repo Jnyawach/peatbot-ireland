@@ -9,15 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/earthengine": "^0.1.367",
+    "@google/earthengine": "^0.1.375",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@vueuse/core": "^10.4.0",
+    "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "vue": "^3.3.4",
     "vue3-google-login": "^2.0.20",
     "vue3-google-oauth2": "^1.0.7"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.8",
     "@types/lodash": "^4.14.197",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.15",
