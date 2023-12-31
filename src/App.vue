@@ -2,12 +2,16 @@
 import MainLayout from "./components/MainLayout.vue";
 import MapsIntegration from "./components/maps-integration.vue";
 import ImageModal from "./components/ImageModal.vue";
+import TrialMap from "./components/trial-map.vue";
 </script>
 
 <template>
   <MainLayout>
   <div>
+    <!--
     <MapsIntegration></MapsIntegration>
+    -->
+    <trial-map></trial-map>
     <div class="">
       <div class="p-3 bg-white shadow">
         <h1 class="text-2xl font-bold my-3">Legend</h1>
