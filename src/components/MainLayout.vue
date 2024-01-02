@@ -6,7 +6,7 @@
   <div class="border-b p-2 py-3">
    <div class="flex justify-between">
      <div>
-       <h1 class="text-sm font-medium">PeatBog Coverage</h1>
+       <h1 class="text-md font-bold">Web-based Peatland Spatial-temporal & Restoration Monitoring System (Clara bog)</h1>
      </div>
      <div class="flex items-center gap-2">
       <div>

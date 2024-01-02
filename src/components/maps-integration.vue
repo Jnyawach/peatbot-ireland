@@ -2,16 +2,17 @@
 import {onMounted, ref} from 'vue'
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import geojson from "./data/CART_Classification_1988.geojson";
+import geojson from "./data/Clara_1988.json";
 const cart_1988=ref<any>()
 
 
 const map=ref()
 const mapContainer=ref()
+const clara_1988=ref<any>(geojson)
 
 
 const  setupLeafletMap=()=>{
- map.value = L.map(mapContainer.value).setView([-1.242699, 36.766670], 13);
+ map.value = L.map(mapContainer.value).setView([53.322264, -7.631294], 13);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -20,15 +21,24 @@ const  setupLeafletMap=()=>{
 }
 
 onMounted(async ()=>{
-  await getData()
   setupLeafletMap()
-  L.geoJSON(geojson).addTo(map.value);
+  await getData()
 })
 
 const getData= async ()=>{
-  const response = await fetch('./data/CART_Classification_1988.geojson')
-  cart_1988.value =  response.json();
-  console.log(cart_1988.value)
+  const response = await fetch('./data/Clara_1988.geojson');
+  cart_1988.value = await response.json();
+  L.geoJSON(clara_1988.value,{
+    style: function(feature) {
+      return {
+        fillColor: 'red',
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        fillOpacity: 0.7
+      };
+    }
+  }).addTo(map.value);
 }
 </script>
 
