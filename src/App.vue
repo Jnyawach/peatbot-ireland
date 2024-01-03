@@ -72,7 +72,7 @@ import ClassifyLegend from "@/components/ClassifyLegend.vue";
             </ol>
 
           </div>
-          <div class="grid">
+          <div class="grid  gap-3">
             <img src="@/assets/problem_statement.png" alt="Problem statement" class="w-full ">
           </div>
 
@@ -106,10 +106,13 @@ import ClassifyLegend from "@/components/ClassifyLegend.vue";
       <div class="my-3">
         <ClassifyLegend></ClassifyLegend>
       </div>
-      <div class="my-3  justify-center">
-        <img src="@/assets/change-detection.png"  alt="Clara bog change detection">
+      <div class="my-3 grid grid-cols-2">
+       <div>
+         <img src="@/assets/change-detection.png"  alt="Clara bog change detection">
+       </div>
       </div>
     </section>
+    <!--
     <section class="max-w-[1280px] p-5 mx-auto border-t border-black">
       <h2 class="font-bold my-3">References</h2>
       <ul class="text-sm space-y-2">
@@ -154,6 +157,7 @@ import ClassifyLegend from "@/components/ClassifyLegend.vue";
         </li>
       </ul>
     </section>
+    -->
   </MainLayout>
 </template>
 
