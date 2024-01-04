@@ -43,33 +43,19 @@ import ClassifyLegend from "@/components/ClassifyLegend.vue";
         </p>
         <div class="grid grid-cols-2 my-3">
           <div>
-            <p class="font-medium text-blue-800">This study had 4 main objectives</p>
-            <ol class="list-decimal pl-5 text-blue-800 space-y-3">
-              <li>
-                <span class="text-gray-900">
-                  To conduct a site assessment of Clara bog to determine the past and
-                current condition, and restoration initiatives
-                </span>
-              </li>
-              <li>
-                <span class="text-gray-900">
-                  To detect changes over five decades using NDVI & NDWI Landsat 5,
-                7 and Sentinel 2 satellite images and Support Vector machine, Random Forest & CART classification
-                </span>
-              </li>
-              <li>
-                <span class="text-gray-900">
-                  To determine most accurate supervised classification algorithm for
-                change detection utilizing evaluation metrics
-                </span>
-              </li>
-              <li>
-                <span class="text-gray-900">
-                  Develop an interactive web-based peatland monitoring system for
-                Clara bog and utilizing the best classification model.
-                </span>
-              </li>
-            </ol>
+            <p class="leading-relaxed">
+              Landsat 5 and Landsat 8 satellite imagery spanning from 1988, 1995, 2004, 2009, 2016 and 2023 is acquired using the
+              Google Earth engine. Training and validation datasets were established utilising field data from NPWS Ecotope surveys
+              conducted in 2005, 2009 and 2016; providing ground truth information of different Ecotope types NDVI and NDWI images are
+              then generated from the Landsat data to assess vegetation and water content over time. NDVI quantifies vegetation health and
+              density while NDWI indicates water content.
+              Two machine learning algorithms are evaluated; Random Forest (RF) and Support Vector Machine (SVM) classify the
+              peatland cover types and distinguish between various vegetation and land cover classes. The accuracy of the classification
+              models is evaluated using metrics such as Kappa, overall accuracy, and Producer accuracy. Using Python programming,
+              Python-based prediction models are developed to forecast trends based on historical data as well as change detection
+              models that identify alterations in the peatland landscape. To enhance accessibility and visualisation, an analysis app
+              within GEE and a dedicated monitoring website are developed, providing interactive tools for stakeholders.
+            </p>
 
           </div>
           <div class="grid  gap-3">
@@ -106,58 +92,24 @@ import ClassifyLegend from "@/components/ClassifyLegend.vue";
       <div class="my-3">
         <ClassifyLegend></ClassifyLegend>
       </div>
-      <div class="my-3 grid grid-cols-2">
+      <div class="my-3 grid grid-cols-2 gap-2">
+        <div>
+          <p class="leading-relaxed">
+            Random Forest Classification was determined as the best-supervised classification with an overall accuracy of
+            82% for 2004 and 82% for 2016. Active flush areas showed slight growth until 2004, stayed steady until 2016, then
+            experienced a significant increase, possibly indicating the ongoing restoration efforts. Conversely, submarginal zones
+            rose until 2004 but steadily declined afterward, likely due to drainage or peat extraction impacting these regions
+            negatively. Marginal and subcentral areas consistently decreased, potentially signifying ongoing habitat loss.
+            Re-wetting and revegetation initiatives could be attributed to the positive trends observed, especially in active
+            flush zones. However, factors like drainage,
+            peat extraction, and climate shifts might have contributed to degradation in the marginal submarginal areas. </p>
+        </div>
        <div>
          <img src="@/assets/change-detection.png"  alt="Clara bog change detection">
        </div>
       </div>
     </section>
-    <!--
-    <section class="max-w-[1280px] p-5 mx-auto border-t border-black">
-      <h2 class="font-bold my-3">References</h2>
-      <ul class="text-sm space-y-2">
-        <li>
-          <p>
-            <span class="font-bold">Review Google Earth Engine and Artificial Intelligence (AI):A Comprehensive Review</span> Liping
-            Yang, Joshua Driscol 1,2, Sarigai Sarigai 1,2, Qiusheng Wu 4 , Haifei Chen 5 and Christopher D.
-            Lippitt 1,2
-          </p>
-        </li>
-        <li>
-          <p>
-            Purbahapsari, A. F., & Batoarung, I. B. (2022). <span class="font-bold">Geospatial Artificial Intelligence for Early Detection
-            of Forest and Land Fires.</span> KnE Social Sciences. https://doi.org/10.18502/kss.v7i9.10947
-          </p>
-        </li>
-        <li>
-          <p>
-            Czapiewski, S., & Szumińska, D. (2022). <span class="font-bold">An overview of remote sensing data applications in
-            peatland research based on works from the period 2010–2021. In Land (Vol. 11, Issue 1).</span> MDPI.
-          </p>
-        </li>
-        <li>
-          <p>
-            Chouinard, E. F.-. et al., 2023.<span class="font-bold"> Extensive global wetland loss over the past three centuries.</span> Nature,
-            February, 614(281–286 (2023))
-          </p>
-        </li>
-        <li>
-          <p>
-            Minasny, B., Berglund, Ö., Connolly, J.,. (2019). <span class="font-bold">Digital mapping of peatlands – A critical review.
-            In Earth-Science Reviews</span> (Vol. 196). Elsevier B.V. https://doi.org/10.1016/j.earscirev.2019.05.014
-          </p>
-        </li>
-        <li>
-          <p>
-            Connolly, J., 2018. <span class="font-bold">Mapping land use on Irish peatlands using medium resolution satellite imagery.
-            Irish Geography</span>, Vol. 51, No. 2 November 2018(DOI: 10.2014/igj.v51i2.1371), pp. 1-2.
-            FAO, 2020. Peatland mapping and monitoring. ISBN 978-92-5-132295-6 ed. s.l.:Food and Agriculture
-            Organization of the United Nations.
-          </p>
-        </li>
-      </ul>
-    </section>
-    -->
+
   </MainLayout>
 </template>
 
